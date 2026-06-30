@@ -36,3 +36,14 @@ CREATE TABLE query_history (
   error_message TEXT,
   created_at TIMESTAMP DEFAULT NOW()
 );
+
+-- Saved Queries Table
+CREATE TABLE saved_queries (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  question TEXT NOT NULL,
+  generated_sql TEXT,
+  explanation TEXT,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
