@@ -3,9 +3,10 @@ import { formatSql } from '../../utils/formatSql';
 
 interface SqlPreviewProps {
   sql: string;
+  loading?: boolean;
 }
 
-const SqlPreview = ({ sql }: SqlPreviewProps) => {
+const SqlPreview = ({ sql, loading = false }: SqlPreviewProps) => {
   const [formattedSql, setFormattedSql] = useState<string>('');
   const [isFormatting, setIsFormatting] = useState<boolean>(false);
   const [showFormatted, setShowFormatted] = useState<boolean>(false);
@@ -34,6 +35,23 @@ const SqlPreview = ({ sql }: SqlPreviewProps) => {
     }
   };
 
+  // Show skeleton loader when loading
+  if (loading) {
+    return (
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">Generated SQL</h3>
+        <div className="bg-gray-900 rounded-md p-4 overflow-x-auto h-32">
+          <div className="animate-pulse space-y-2">
+            <div className="h-2 bg-green-600 rounded w-1/2"></div>
+            <div className="h-2 bg-green-600 rounded w-3/4"></div>
+            <div className="h-2 bg-green-600 rounded w-1/2"></div>
+            <div className="h-2 bg-green-600 rounded w-3/4"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex justify-between items-start mb-4">
@@ -48,7 +66,7 @@ const SqlPreview = ({ sql }: SqlPreviewProps) => {
           </button>
           <button
             onClick={() => copyToClipboard(showFormatted ? formattedSql : sql)}
-            className="px-3 py-1 bg-green-100000 text-green-800 rounded hover:bg-green-200"
+            className="px-3 py-1 bg-green-100 text-green-800 rounded hover:bg-green-200"
           >
             Copy SQL
           </button>
