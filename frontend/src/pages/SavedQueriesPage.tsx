@@ -98,7 +98,7 @@ const SavedQueriesPage: React.FC = () => {
   const handleLoad = (query: SavedQuery) => {
     // For now, we'll just show an alert. In a real app, we would navigate to the QueryPage
     // and set the question there.
-    alert(`Loaded query: ${question}\n\nNote: To actually load this query into the query input, you would need to navigate to the Query page and set the question. This is a placeholder.`);
+    alert(`Loaded query: ${query.question}\n\nNote: To actually load this query into the query input, you would need to navigate to the Query page and set the question. This is a placeholder.`);
   };
 
   return (
@@ -142,10 +142,10 @@ const SavedQueriesPage: React.FC = () => {
       <SaveQueryModal
         isOpen={showSaveModal}
         onClose={() => setShowSaveModal(false)}
-        onSave={editingQuery ? handleUpdate : handleSave}
-        initialData={editingQuery}
+        onSave={(data) => editingQuery ? handleUpdate(editingQuery.id, data) : handleSave(data)}
+        initialData={editingQuery || undefined}
       />
-    </div>
+    </PageContainer>
   );
 };
 
