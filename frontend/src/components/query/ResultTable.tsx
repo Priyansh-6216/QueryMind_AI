@@ -11,7 +11,7 @@ const ResultTable = ({ columns, rows, loading = false }: ResultTableProps) => {
   // Show skeleton loader when loading
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Query Results</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -50,7 +50,7 @@ const ResultTable = ({ columns, rows, loading = false }: ResultTableProps) => {
   // Show empty state when no data
   if (columns.length === 0 || rows.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Query Results</h3>
         <p className="text-gray-500">No results to display</p>
       </div>
@@ -59,7 +59,7 @@ const ResultTable = ({ columns, rows, loading = false }: ResultTableProps) => {
 
   // Show actual data
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h3 className="text-lg font-semibold mb-4">Query Results</h3>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">

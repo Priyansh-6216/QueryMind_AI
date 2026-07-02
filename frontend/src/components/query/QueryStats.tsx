@@ -27,7 +27,7 @@ const QueryStats = ({
   // Show skeleton loader when loading
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Query Statistics</h3>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
@@ -54,7 +54,7 @@ const QueryStats = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h3 className="text-lg font-semibold mb-4">Query Statistics</h3>
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center">

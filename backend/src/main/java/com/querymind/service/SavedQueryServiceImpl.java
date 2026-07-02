@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,11 @@ public class SavedQueryServiceImpl implements SavedQueryService {
     @Override
     public void deleteSavedQuery(Long id) {
         savedQueryRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<SavedQueryDto> getSavedQueryById(Long id) {
+        return savedQueryRepository.findById(id).map(this::entityToDto);
     }
 
     private SavedQueryDto entityToDto(SavedQuery savedQuery) {

@@ -28,7 +28,7 @@ const QueryInput = ({ onSubmit, loading }: QueryInputProps) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h2 className="text-lg font-semibold mb-4">Ask a Question</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">

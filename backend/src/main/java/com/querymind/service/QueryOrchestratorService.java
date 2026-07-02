@@ -5,6 +5,8 @@ import com.querymind.dto.QueryResponse;
 import com.querymind.dto.SqlGenerationResponse;
 import com.querymind.exception.QueryExecutionException;
 import com.querymind.exception.UnsafeSqlException;
+import com.querymind.validator.SqlSafetyValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,8 +72,8 @@ public class QueryOrchestratorService {
 
             // 7. Return response
             return new QueryResponse(question, safeSql, explanation,
-                                   formatted.getColumns(), formatted.getRows(),
-                                   rowCount, executionTimeMs, status);
+                    formatted.getColumns(), formatted.getRows(),
+                    rowCount, executionTimeMs, status);
 
         } catch (UnsafeSqlException e) {
             status = "ERROR";
@@ -84,8 +86,8 @@ public class QueryOrchestratorService {
         } finally {
             // 8. Save history
             queryHistoryService.saveQueryHistory(question, generatedSql, explanation,
-                                                status, rowCount, executionTimeMs != null ? executionTimeMs.intValue() : null,
-                                                errorMessage);
+                    status, rowCount, executionTimeMs != null ? executionTimeMs.intValue() : null,
+                    errorMessage);
         }
     }
 }

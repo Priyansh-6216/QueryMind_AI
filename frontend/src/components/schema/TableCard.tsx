@@ -7,7 +7,7 @@ interface TableCardProps {
 
 const TableCard = ({ table }: TableCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
         {table.name}
       </h3>

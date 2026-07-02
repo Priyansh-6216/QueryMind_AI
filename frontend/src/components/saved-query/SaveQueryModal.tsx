@@ -47,7 +47,7 @@ const SaveQueryModal: React.FC<SaveQueryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+      <div className="glass rounded-2xl transition-all duration-300 hover:shadow-lg-xl w-full max-w-md mx-4 p-6">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-xl font-bold">
             {initialData ? 'Edit Saved Query' : 'Save Query'}

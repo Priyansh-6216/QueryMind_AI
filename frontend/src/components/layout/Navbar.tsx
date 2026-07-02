@@ -15,7 +15,7 @@ const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
   ]
 
   return (
-    <nav className="bg-white shadow-sm border-b dark:bg-gray-800">
+    <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-800/50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
@@ -25,10 +25,10 @@ const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
                 <button
                   key={item.id}
                   onClick={() => onPageChange(item.id)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ease-in-out ${
                     currentPage === item.id
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-200 dark:text-blue-800'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700'
+                      ? 'bg-brand-500 text-white shadow-md shadow-brand-500/30'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/80 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800/80'
                   }`}
                 >
                   {item.label}
@@ -39,7 +39,7 @@ const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
           <div className="flex items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
+              className="p-2.5 rounded-xl text-gray-500 hover:text-gray-900 hover:bg-gray-100/80 transition-all duration-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800/80"
               title="Toggle theme"
             >
               {theme === 'light' ? (

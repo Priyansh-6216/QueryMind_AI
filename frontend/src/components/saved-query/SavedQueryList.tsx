@@ -16,7 +16,7 @@ const SavedQueryList: React.FC<SavedQueryListProps> = ({
 }) => {
   if (savedQueries.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Saved Queries</h3>
         <p className="text-gray-500">No saved queries yet. Create your first one!</p>
       </div>
@@ -24,7 +24,7 @@ const SavedQueryList: React.FC<SavedQueryListProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h3 className="text-lg font-semibold mb-4">Saved Queries</h3>
       <div className="space-y-4">
         {savedQueries.map((query) => (

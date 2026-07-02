@@ -38,7 +38,7 @@ const SqlPreview = ({ sql, loading = false }: SqlPreviewProps) => {
   // Show skeleton loader when loading
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Generated SQL</h3>
         <div className="bg-gray-900 rounded-md p-4 overflow-x-auto h-32">
           <div className="animate-pulse space-y-2">
@@ -53,7 +53,7 @@ const SqlPreview = ({ sql, loading = false }: SqlPreviewProps) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-lg font-semibold">Generated SQL</h3>
         <div className="flex space-x-2">

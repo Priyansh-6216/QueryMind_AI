@@ -9,7 +9,7 @@ interface ExplanationBoxProps {
 const ExplanationBox = ({ explanation, loading = false }: ExplanationBoxProps) => {
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-lg font-semibold">AI Explanation</h3>
         </div>
@@ -29,7 +29,7 @@ const ExplanationBox = ({ explanation, loading = false }: ExplanationBoxProps) =
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="glass rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
       <h3 className="text-lg font-semibold mb-4">AI Explanation</h3>
       <div className="prose prose-sm max-w-none">
         <p className="text-gray-700 leading-relaxed">{explanation}</p>

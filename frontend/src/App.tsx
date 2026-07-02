@@ -24,9 +24,9 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50/50 dark:bg-slate-900 text-gray-900 dark:text-gray-100 font-sans selection:bg-brand-500 selection:text-white transition-colors duration-300">
       <Navbar currentPage={currentPage} onPageChange={setCurrentPage} />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-12 max-w-7xl animate-fade-in">
         {renderPage()}
       </main>
     </div>
