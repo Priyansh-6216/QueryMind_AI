@@ -58,6 +58,7 @@ public class QueryOrchestratorService {
             SqlGenerationResponse aiResponse = aiSqlService.generateSql(prompt);
             generatedSql = aiResponse.getSql();
             explanation = aiResponse.getExplanation();
+            String suggestedChartType = aiResponse.getSuggestedChartType();
 
             // 4. Validate SQL
             String safeSql = sqlSafetyValidator.validateAndSanitize(generatedSql);
@@ -73,7 +74,7 @@ public class QueryOrchestratorService {
             // 7. Return response
             return new QueryResponse(question, safeSql, explanation,
                     formatted.getColumns(), formatted.getRows(),
-                    rowCount, executionTimeMs, status);
+                    rowCount, executionTimeMs, status, suggestedChartType);
 
         } catch (UnsafeSqlException e) {
             status = "ERROR";

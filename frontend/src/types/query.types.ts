@@ -11,6 +11,7 @@ export interface QueryResponse {
   rowCount: number;
   executionTimeMs: number;
   status: string;
+  suggestedChartType?: string;
 }
 
 export interface ErrorResponse {

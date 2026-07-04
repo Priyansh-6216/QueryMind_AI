@@ -11,12 +11,13 @@ public class QueryResponse {
     private int rowCount;
     private long executionTimeMs;
     private String status;
+    private String suggestedChartType;
 
     public QueryResponse() {}
 
     public QueryResponse(String question, String sql, String explanation,
                         List<String> columns, List<List<Object>> rows,
-                        int rowCount, long executionTimeMs, String status) {
+                        int rowCount, long executionTimeMs, String status, String suggestedChartType) {
         this.question = question;
         this.sql = sql;
         this.explanation = explanation;
@@ -25,6 +26,14 @@ public class QueryResponse {
         this.rowCount = rowCount;
         this.executionTimeMs = executionTimeMs;
         this.status = status;
+        this.suggestedChartType = suggestedChartType;
+    }
+
+    // Constructor for backward compatibility (suggestedChartType defaults to "NONE")
+    public QueryResponse(String question, String sql, String explanation,
+                        List<String> columns, List<List<Object>> rows,
+                        int rowCount, long executionTimeMs, String status) {
+        this(question, sql, explanation, columns, rows, rowCount, executionTimeMs, status, "NONE");
     }
 
     // Getters and setters
@@ -51,4 +60,7 @@ public class QueryResponse {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getSuggestedChartType() { return suggestedChartType; }
+    public void setSuggestedChartType(String suggestedChartType) { this.suggestedChartType = suggestedChartType; }
 }

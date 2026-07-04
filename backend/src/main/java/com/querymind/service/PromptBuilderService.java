@@ -20,10 +20,16 @@ public class PromptBuilderService {
                "9. Do not explain outside the JSON.\n\n" +
                "Database schema:\n" + schemaText + "\n\n" +
                "User question:\n" + question + "\n\n" +
+               "Additionally, analyze the query results and suggest the most appropriate chart type for visualizing the data:\n" +
+               "- BAR: For comparing categorical data (e.g., sales by product, counts by category)\n" +
+               "- LINE: For showing trends over time (e.g., monthly sales, temperature over days)\n" +
+               "- PIE: For showing proportions of a whole (e.g., market share, budget allocation)\n" +
+               "- NONE: If the data is not suitable for visualization (e.g., text data, complex multi-dimensional data)\n\n" +
                "Return format:\n" +
                "{\n" +
                "  \"sql\": \"SELECT ...\",\n" +
-               "  \"explanation\": \"Simple explanation...\"\n" +
+               "  \"explanation\": \"Simple explanation...\",\n" +
+               "  \"suggestedChartType\": \"BAR|LINE|PIE|NONE\"\n" +
                "}";
     }
 }

@@ -65,8 +65,9 @@ public class AiSqlService {
             JsonNode jsonResponse = objectMapper.readTree(content);
             String sql = jsonResponse.path("sql").asText();
             String explanation = jsonResponse.path("explanation").asText();
+            String suggestedChartType = jsonResponse.path("suggestedChartType").asText("NONE"); // Default to NONE if not provided
 
-            return new SqlGenerationResponse(sql, explanation);
+            return new SqlGenerationResponse(sql, explanation, suggestedChartType);
         } catch (Exception e) {
             // Retry once if parsing fails
             try {
