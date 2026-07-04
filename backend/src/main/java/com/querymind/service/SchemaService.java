@@ -17,12 +17,12 @@ import java.util.List;
 public class SchemaService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private DatabaseConnectionManager databaseConnectionManager;
 
     public SchemaResponse getSchema() {
         List<TableSchemaDto> tables = new ArrayList<>();
         try {
-            DatabaseMetaData metaData = jdbcTemplate.getDataSource().getConnection().getMetaData();
+            DatabaseMetaData metaData = databaseConnectionManager.getTargetJdbcTemplate().getDataSource().getConnection().getMetaData();
             ResultSet tablesRs = metaData.getTables(null, null, "%", new String[]{"TABLE"});
 
             while (tablesRs.next()) {

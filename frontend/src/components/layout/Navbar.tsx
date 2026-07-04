@@ -12,6 +12,7 @@ const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
     { id: 'history', label: 'History' },
     { id: 'schema', label: 'Schema' },
     { id: 'saved-queries', label: 'Saved Queries' },
+    { id: 'settings', label: 'Settings' },
   ]
 
   return (

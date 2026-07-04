@@ -5,6 +5,8 @@ import HistoryPage from './pages/HistoryPage'
 import SchemaPage from './pages/SchemaPage'
 import SavedQueriesPage from './pages/SavedQueriesPage'
 
+import SettingsPage from './pages/SettingsPage'
+
 function App() {
   const [currentPage, setCurrentPage] = useState('query')
 
@@ -18,6 +20,8 @@ function App() {
         return <SchemaPage />
       case 'saved-queries':
         return <SavedQueriesPage />
+      case 'settings':
+        return <SettingsPage />
       default:
         return <QueryPage />
     }

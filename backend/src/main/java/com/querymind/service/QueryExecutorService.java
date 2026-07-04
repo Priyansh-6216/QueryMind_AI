@@ -11,13 +11,13 @@ import java.util.Map;
 public class QueryExecutorService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private DatabaseConnectionManager databaseConnectionManager;
 
     public QueryResult executeQuery(String sql) {
         long startTime = System.currentTimeMillis();
 
         try {
-            List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+            List<Map<String, Object>> result = databaseConnectionManager.getTargetJdbcTemplate().queryForList(sql);
             long executionTime = System.currentTimeMillis() - startTime;
 
             return new QueryResult(result, executionTime);
