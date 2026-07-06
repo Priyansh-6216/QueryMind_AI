@@ -1,19 +1,25 @@
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext'
+import { useAuth } from '../../context/AuthContext'
 
-interface NavbarProps {
-  currentPage: string;
-  onPageChange: (page: string) => void;
-}
-
-const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
+const Navbar = () => {
   const { theme, toggleTheme } = useTheme()
+  const { logout } = useAuth()
+  const location = useLocation()
+  const navigate = useNavigate()
+  
   const navItems = [
-    { id: 'query', label: 'Query' },
-    { id: 'history', label: 'History' },
-    { id: 'schema', label: 'Schema' },
-    { id: 'saved-queries', label: 'Saved Queries' },
-    { id: 'settings', label: 'Settings' },
+    { id: '/query', label: 'Query' },
+    { id: '/history', label: 'History' },
+    { id: '/schema', label: 'Schema' },
+    { id: '/saved-queries', label: 'Saved Queries' },
+    { id: '/settings', label: 'Settings' },
   ]
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-800/50">
@@ -23,21 +29,27 @@ const Navbar = ({ currentPage, onPageChange }: NavbarProps) => {
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">QueryMind AI</h1>
             <div className="flex space-x-4">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => onPageChange(item.id)}
+                  to={item.id}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ease-in-out ${
-                    currentPage === item.id
+                    location.pathname.startsWith(item.id)
                       ? 'bg-brand-500 text-white shadow-md shadow-brand-500/30'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/80 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800/80'
                   }`}
                 >
                   {item.label}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm font-medium text-red-600 rounded-xl hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/30 transition-colors"
+            >
+              Logout
+            </button>
             <button
               onClick={toggleTheme}
               className="p-2.5 rounded-xl text-gray-500 hover:text-gray-900 hover:bg-gray-100/80 transition-all duration-200 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800/80"

@@ -11,6 +11,10 @@ public class QueryHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private AppUser user;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String question;
 
@@ -54,6 +58,9 @@ public class QueryHistory {
     // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
+    public AppUser getUser() { return user; }
+    public void setUser(AppUser user) { this.user = user; }
 
     public String getQuestion() { return question; }
     public void setQuestion(String question) { this.question = question; }
