@@ -44,6 +44,11 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            {localStorage.getItem('username') && (
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Hi, {localStorage.getItem('username')}
+              </span>
+            )}
             <button
               onClick={handleLogout}
               className="px-4 py-2 text-sm font-medium text-red-600 rounded-xl hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/30 transition-colors"
