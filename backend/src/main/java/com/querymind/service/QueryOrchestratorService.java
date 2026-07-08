@@ -67,6 +67,9 @@ public class QueryOrchestratorService {
             QueryExecutorService.QueryResult result = queryExecutorService.executeQuery(safeSql);
             executionTimeMs = result.getExecutionTimeMs();
 
+            // 5.5 Get Execution Plan
+            String executionPlan = queryExecutorService.executeExplain(safeSql);
+
             // 6. Format result
             ResultFormatterService.ResultFormat formatted = resultFormatterService.formatResult(result.getRows());
             rowCount = formatted.getRows().size();
@@ -74,7 +77,7 @@ public class QueryOrchestratorService {
             // 7. Return response
             return new QueryResponse(question, safeSql, explanation,
                     formatted.getColumns(), formatted.getRows(),
-                    rowCount, executionTimeMs, status, suggestedChartType);
+                    rowCount, executionTimeMs, status, suggestedChartType, executionPlan);
 
         } catch (UnsafeSqlException e) {
             status = "ERROR";

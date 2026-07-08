@@ -12,12 +12,13 @@ public class QueryResponse {
     private long executionTimeMs;
     private String status;
     private String suggestedChartType;
+    private String executionPlan;
 
     public QueryResponse() {}
 
     public QueryResponse(String question, String sql, String explanation,
                         List<String> columns, List<List<Object>> rows,
-                        int rowCount, long executionTimeMs, String status, String suggestedChartType) {
+                        int rowCount, long executionTimeMs, String status, String suggestedChartType, String executionPlan) {
         this.question = question;
         this.sql = sql;
         this.explanation = explanation;
@@ -27,13 +28,20 @@ public class QueryResponse {
         this.executionTimeMs = executionTimeMs;
         this.status = status;
         this.suggestedChartType = suggestedChartType;
+        this.executionPlan = executionPlan;
+    }
+
+    public QueryResponse(String question, String sql, String explanation,
+                        List<String> columns, List<List<Object>> rows,
+                        int rowCount, long executionTimeMs, String status, String suggestedChartType) {
+        this(question, sql, explanation, columns, rows, rowCount, executionTimeMs, status, suggestedChartType, null);
     }
 
     // Constructor for backward compatibility (suggestedChartType defaults to "NONE")
     public QueryResponse(String question, String sql, String explanation,
                         List<String> columns, List<List<Object>> rows,
                         int rowCount, long executionTimeMs, String status) {
-        this(question, sql, explanation, columns, rows, rowCount, executionTimeMs, status, "NONE");
+        this(question, sql, explanation, columns, rows, rowCount, executionTimeMs, status, "NONE", null);
     }
 
     // Getters and setters
@@ -63,4 +71,7 @@ public class QueryResponse {
 
     public String getSuggestedChartType() { return suggestedChartType; }
     public void setSuggestedChartType(String suggestedChartType) { this.suggestedChartType = suggestedChartType; }
+
+    public String getExecutionPlan() { return executionPlan; }
+    public void setExecutionPlan(String executionPlan) { this.executionPlan = executionPlan; }
 }

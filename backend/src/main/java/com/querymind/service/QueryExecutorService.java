@@ -27,6 +27,26 @@ public class QueryExecutorService {
         }
     }
 
+    public String executeExplain(String sql) {
+        try {
+            // Postgres supports EXPLAIN ANALYZE. Since the app is built around postgres, this should work.
+            List<Map<String, Object>> result = databaseConnectionManager.getTargetJdbcTemplate().queryForList("EXPLAIN ANALYZE " + sql);
+            StringBuilder plan = new StringBuilder();
+            for (Map<String, Object> row : result) {
+                // The column name is usually "QUERY PLAN"
+                for (Object value : row.values()) {
+                    if (value != null) {
+                        plan.append(value.toString()).append("\n");
+                    }
+                }
+            }
+            return plan.toString();
+        } catch (Exception e) {
+            // If EXPLAIN ANALYZE fails (e.g. for some non-select queries or syntax issues), log and return error
+            return "Execution Plan not available: " + e.getMessage();
+        }
+    }
+
     public static class QueryResult {
         private final List<Map<String, Object>> rows;
         private final long executionTimeMs;

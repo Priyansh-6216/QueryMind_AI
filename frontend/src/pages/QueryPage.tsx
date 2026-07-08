@@ -9,12 +9,13 @@ import ResultTable from '../components/query/ResultTable'
 import ResultChart from '../components/query/ResultChart'
 import QueryStats from '../components/query/QueryStats'
 import ErrorBanner from '../components/common/ErrorBanner'
+import ExecutionPlanBox from '../components/query/ExecutionPlanBox'
 
 const QueryPage = () => {
   const [result, setResult] = useState<QueryResponse | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [viewMode, setViewMode] = useState<'table' | 'chart' | 'split'>('split')
+  const [viewMode, setViewMode] = useState<'table' | 'chart' | 'split' | 'explain'>('split')
 
   const handleQuerySubmit = async (question: string) => {
     setLoading(true)
@@ -53,7 +54,7 @@ const QueryPage = () => {
 
         {result && !loading && (
           <>
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <button
                 onClick={() => setViewMode('table')}
                 className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-xl ${
@@ -83,6 +84,16 @@ const QueryPage = () => {
                 }`}
               >
                 Split View
+              </button>
+              <button
+                onClick={() => setViewMode('explain')}
+                className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-xl ${
+                  viewMode === 'explain'
+                    ? 'bg-brand-500 text-white shadow-md shadow-brand-500/30'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700'
+                }`}
+              >
+                Explain Plan
               </button>
             </div>
 
@@ -132,6 +143,19 @@ const QueryPage = () => {
                     />
                   </div>
                 </div>
+                <QueryStats
+                  rowCount={result.rowCount}
+                  executionTimeMs={result.executionTimeMs}
+                  status={result.status}
+                />
+              </>
+            )}
+
+            {viewMode === 'explain' && (
+              <>
+                <SqlPreview sql={result.sql} />
+                <ExplanationBox explanation={result.explanation} />
+                <ExecutionPlanBox plan={result.executionPlan} />
                 <QueryStats
                   rowCount={result.rowCount}
                   executionTimeMs={result.executionTimeMs}

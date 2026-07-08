@@ -12,6 +12,7 @@ export interface QueryResponse {
   executionTimeMs: number;
   status: string;
   suggestedChartType?: string;
+  executionPlan?: string;
 }
 
 export interface ErrorResponse {
