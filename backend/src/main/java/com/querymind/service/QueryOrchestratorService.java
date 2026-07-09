@@ -52,7 +52,12 @@ public class QueryOrchestratorService {
             String schemaText = schemaService.getSchemaAsText();
 
             // 2. Build prompt
-            String prompt = promptBuilderService.buildPrompt(question, schemaText);
+            String prompt = promptBuilderService.buildPrompt(
+                question, 
+                schemaText, 
+                request.getPreviousQuestion(), 
+                request.getPreviousSql()
+            );
 
             // 3. Generate SQL
             SqlGenerationResponse aiResponse = aiSqlService.generateSql(prompt);

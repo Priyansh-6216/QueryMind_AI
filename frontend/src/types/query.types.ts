@@ -1,5 +1,7 @@
 export interface QueryRequest {
   question: string;
+  previousQuestion?: string;
+  previousSql?: string;
 }
 
 export interface QueryResponse {

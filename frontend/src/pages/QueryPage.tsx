@@ -17,14 +17,35 @@ const QueryPage = () => {
   const [error, setError] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<'table' | 'chart' | 'split' | 'explain'>('split')
 
+  const [lastSuccessfulQuery, setLastSuccessfulQuery] = useState<{question: string, sql: string} | null>(null)
+
   const handleQuerySubmit = async (question: string) => {
+    let previousQuestion: string | undefined;
+    let previousSql: string | undefined;
+
+    // Use current result if it exists and was successful, otherwise fallback to lastSuccessfulQuery state
+    if (result && result.status === 'SUCCESS') {
+      previousQuestion = result.question;
+      previousSql = result.sql;
+    } else if (lastSuccessfulQuery) {
+      previousQuestion = lastSuccessfulQuery.question;
+      previousSql = lastSuccessfulQuery.sql;
+    }
+
     setLoading(true)
     setError(null)
     setResult(null)
 
     try {
-      const response = await queryApi.executeQuery({ question })
+      const response = await queryApi.executeQuery({ 
+        question,
+        previousQuestion,
+        previousSql
+      })
       setResult(response)
+      if (response.status === 'SUCCESS') {
+        setLastSuccessfulQuery({ question: response.question, sql: response.sql })
+      }
     } catch (err: any) {
       if (err.response?.data?.message) {
         setError(err.response.data.message)
